@@ -2,15 +2,23 @@ package com.example.legacyviewproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -76,23 +84,71 @@ fun ImageComposable() {
 @Preview
 @Composable
 fun ButtonComposable() {
-    Button(
-        onClick = {  },
-        colors = ButtonDefaults.buttonColors(
-            contentColor = Color.White, // This is for text color
-            containerColor = Color.LightGray // This is for background color
-        ),
-        enabled = true,
+    Column(modifier = Modifier.fillMaxSize()) {
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(
+                contentColor = Color.White, // This is for text color
+                containerColor = Color.LightGray // This is for background color
+            ),
+            enabled = true,
         shape = CircleShape,
-        modifier = Modifier.height(100.dp).width(40.dp)
-    ) {
-        Text(text = "Click here")
-        Image(
-            painter = painterResource(id = R.drawable.ic_android_black_24dp),
-            contentDescription = "Dummy Img"
-        )
-        // This is how we can render both text and image inside a button
-        // This was not possible with the xml as it is based on inheritance
-        // but compose declarative pattern is based on composition hence we can do it here.
+            modifier = Modifier.size(width = 130.dp, height = 40.dp)
+//            modifier = Modifier
+//                .height(100.dp)
+//                .width(40.dp)
+        ) {
+            Text(text = "Click here")
+            Image(
+                painter = painterResource(id = R.drawable.ic_android_black_24dp),
+                contentDescription = "Dummy Img"
+            )
+            // This is how we can render both text and image inside a button
+            // This was not possible with the xml as it is based on inheritance
+            // but compose declarative pattern is based on composition hence we can do it here.
+        }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true, widthDp = 300, heightDp = 500)
+@Composable
+fun TextFieldComposable() {
+    TextField(
+        value = "Hello Shubham",
+        onValueChange = {},
+        label = { Text(text = "Enter Message")},
+        placeholder = {} // So the placeholder here expect a composable, so here we can define a custom placeholder as we have to provide a composable
+        // There are some more properties which expect composable, open TextField to check which properties expecting composable.
+    )
+}
+
+// Remember: Whatever UI we create in compose, it gets created based on data
+// You give data as a input and it generates the UI based on that data.
+// If any change happens in the provided data then compose will update the UI based on latest updates in data.
+// There are 2 types of compositions
+// 1] Initial Composition: This is when first time UI created on first data
+// 2] Recomposition: This is when UI gets updated based on data updates
+// So basically it's state which plays role for updating compose UI.
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TextInput() {
+    // val state = mutableStateOf("") // There are many cases where compose will recall
+    // this method, and if that happens this state variable gets recreated and our state
+    // will be lost. To prevent this we need to use "remember" keyword before "mutableStateOf"
+    // "remember" will keep compose remember the last state and our state we'll never lose the state.
+    val state = remember { mutableStateOf("") } // This empty string "" is initial state when
+    // this function gets called for the first time, later as we update the state "remember" will
+    // remember the state.
+
+    // This method will get called again during every recomposition.
+    TextField(
+        value = state.value,
+        onValueChange = {
+            state.value = it
+            Log.d("SHUBZ_LOGS", it)
+        },
+        label = { Text(text = "Enter message") }
+    )
 }
