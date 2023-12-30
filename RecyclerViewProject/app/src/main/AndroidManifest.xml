@@ -10,26 +10,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LegacyViewProject"
+        android:theme="@style/Theme.RecyclerViewProject"
         tools:targetApi="31">
         <activity
-            android:name=".ModifiersActivity"
-            android:exported="false"
-            android:label="@string/title_activity_modifiers"
-            android:theme="@style/Theme.LegacyViewProject" />
-        <activity
-            android:name=".RecyclerViewActivity"
-            android:exported="false"
-            android:label="@string/title_activity_recycler_view"
-            android:theme="@style/Theme.LegacyViewProject" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true" />
-        <activity
-            android:name=".LayoutsActivity"
             android:exported="true"
-            android:label="@string/title_activity_layouts"
-            android:theme="@style/Theme.LegacyViewProject">
+            android:label="@string/app_name"
+            android:theme="@style/Theme.RecyclerViewProject">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

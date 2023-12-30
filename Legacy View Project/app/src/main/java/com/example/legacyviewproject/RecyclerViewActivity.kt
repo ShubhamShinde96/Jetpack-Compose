@@ -24,6 +24,9 @@ import androidx.compose.ui.unit.sp
 import com.example.legacyviewproject.ui.theme.LegacyViewProjectTheme
 
 class RecyclerViewActivity : ComponentActivity() {
+
+    // 2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -35,7 +38,6 @@ class RecyclerViewActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewComposable() {
-
     Column() {
         ListViewItem(
             R.drawable.user_icon,
