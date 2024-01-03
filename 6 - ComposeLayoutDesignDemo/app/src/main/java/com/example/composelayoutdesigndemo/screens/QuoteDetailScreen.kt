@@ -1,5 +1,6 @@
 package com.example.composelayoutdesigndemo.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,11 +28,18 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composelayoutdesigndemo.R
+import com.example.composelayoutdesigndemo.models.DataManager
 import com.example.composelayoutdesigndemo.models.Quote
 
 @Preview
 @Composable
 fun QuoteDetail(quote: Quote) {
+
+    // We have concept of 1'Effect Handlers", that we'll cover in next project.
+    BackHandler() {
+        DataManager.switchPages(null)
+    }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier

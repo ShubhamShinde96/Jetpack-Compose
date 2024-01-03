@@ -36,11 +36,11 @@ import com.example.composelayoutdesigndemo.models.Quote
 
 //@Preview
 @Composable
-fun QuoteListItem(quote: Quote, onclick: () -> Unit) {
+fun QuoteListItem(quote: Quote, onclick: (quote: Quote) -> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier.padding(8.dp)
-            .clickable { onclick() },
+            .clickable { onclick(quote) },
     ) {
         Row(
             modifier = Modifier.padding(16.dp)
