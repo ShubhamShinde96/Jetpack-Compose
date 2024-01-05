@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.themes.ui.theme.ThemesTheme
 
@@ -28,6 +30,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
+
+//    LocalConfiguration.current.uiMode  // Got this from ui.theme/Theme.kt isSystemInDarkTheme() > _isSystemInDarkTheme() >
+//    LocalConfiguration.current. // chec the properties by putting . and we can use them where we are using compose in
+      // our application.
+      // Similarly if we want to access context in compose functions then we can use "LocalContext"
+//    LocalContext.current
+//    LocalContext.current.applicationContext
+      // Explore more properties of LocalContext.current
+
     var theme = remember {
         mutableStateOf(false)
     }
