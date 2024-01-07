@@ -58,17 +58,17 @@ fun ListComposable() {
     val categoryState = remember {
         mutableStateOf(emptyList<String>())
     }
-//    categoryState.value = fetchCategories() // 1st problem - we called a network call function here.
+    // categoryState.value = fetchCategories() // 1st problem - we called a network call function here.
     // The thing is we don't know how many times this composable function might get called.
 
     // Problem 2 - if this network call takes time then our UI rendering gets delayed and UI will lag.
     // App will get frozen.
 
-    // But sometimes we have to do such kind of operations any way and at that time we have to manage.
-    // these side effect.
+    // But sometimes we have to do such kind of operations(side effect) any way and at that time we
+    // have to manage these side effect.
     // Sometime we'll have to write a code which will prevent executing such network call again and
-    // again. our composable will continue executing again and again but we'll do in such a way that
-    // how many times and how that network call should be called on that we'll have the control.
+    // again. Our composable will continue executing again and again but we'll do in such a way that
+    // we'll have the control on how many times and how that network call should be called.
 
     // Sometimes side effects becomes important and we need this side effects to happen.
     // Suppose we are implementing back button code, now we want back button event to happen on certain
