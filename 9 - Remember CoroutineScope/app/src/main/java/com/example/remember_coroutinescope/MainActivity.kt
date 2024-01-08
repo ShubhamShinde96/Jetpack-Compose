@@ -84,7 +84,7 @@ fun LaunchEffectComposable() {
     }
 
     // Problem No 2]: This CoroutineScope that we are getting inside/through this LaunchedEffect that
-    // is given to use by that LaunchedEffect only, hence whatever management of that CoroutineScope
+    // is given to us by that LaunchedEffect only, hence whatever management of that CoroutineScope
     // is, means when it will start that coroutine and when it will cancel/end that coroutine that is
     // all managed by this LaunchEffect composable, we don't have any control over it. controle means
     // if we want to cancel coroutine, or we may want to delay the coroutine or we want to join some
