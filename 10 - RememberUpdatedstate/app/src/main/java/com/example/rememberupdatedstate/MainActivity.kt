@@ -35,7 +35,7 @@ fun App() {
     // RememberUpdatedState is not a side effect, it is a composable to manage the state inside
     // SideEffect.
 
-    var counter = remember {
+    val counter = remember {
         mutableStateOf(0)
     }
     LaunchedEffect(key1 = Unit) {
@@ -50,7 +50,7 @@ fun App() {
 fun Counter(value: Int) {
     // LaunchedEffect(key1 = value) { if I do this then also we will get the updated value but this
     // is not our solution, because we don't want this LaunchedEffect to run again and perform
-    // the long  running task again and again whenever value of param "value" gets changed.
+    // the long running task again and again whenever value of param "value" gets changed.
     LaunchedEffect(key1 = Unit) {
 
         delay(5000) // Here we're mimicking a long running task.
