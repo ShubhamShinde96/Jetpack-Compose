@@ -55,8 +55,8 @@ fun LaunchEffectComposable() {
         } catch (e: Exception) {
             Log.d("REMEMBER_C_SCOPE", "Exception: ${e.message.toString()}") // We used to get
             // this log "Exception: StandaloneCoroutine was cancelled" but we're not getting this log anymore.
-            // This was according to CeezyCode.
-            // Why this was happening is: When LaunchEffect starts this creates a new coroutine for us
+            // This was according to CheezyCode.
+            // Why this was happening is: When LaunchEffect starts it creates a new coroutine for us
             // and when we rotate the device and activity gets recreated (configuration changes) then the
             // hierarchy of composable (LaunchEffectComposable()) gets recreated. When this composable
             // gets recreated then LaunchEffect will gets re-executed and that's why it disposes the
@@ -74,7 +74,7 @@ fun LaunchEffectComposable() {
     // case we will not be able to use this LaunchEffect.
     
     Button(onClick = {
-        //LaunchedEffect(key1 = Unit) {} // This is giving us error "@Composable invocations can only
+        // LaunchedEffect(key1 = Unit) {} // This is giving us error "@Composable invocations can only
         // happen from the context of a @Composable function" basically this is saying composable
         // functions can only run through composable only.
         // So basically we can't use LaunchEffect to launch coroutine here in this button click event.
@@ -86,7 +86,7 @@ fun LaunchEffectComposable() {
     // Problem No 2]: This CoroutineScope that we are getting inside/through this LaunchedEffect that
     // is given to us by that LaunchedEffect only, hence whatever management of that CoroutineScope
     // is, means when it will start that coroutine and when it will cancel/end that coroutine that is
-    // all managed by this LaunchEffect composable, we don't have any control over it. controle means
+    // all managed by this LaunchEffect composable, we don't have any control over it. control means
     // if we want to cancel coroutine, or we may want to delay the coroutine or we want to join some
     // coroutine so those things we can't do over here.
 

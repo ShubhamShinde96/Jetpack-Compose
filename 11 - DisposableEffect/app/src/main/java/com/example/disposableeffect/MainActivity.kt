@@ -111,7 +111,8 @@ fun KeyboardComposable() {
             // are there in view and those rectangles are called as insets.
             val isKeyboardVisible =
                 insets?.isVisible(WindowInsetsCompat.Type.ime()) // This ime represents the keyboard.
-            Log.d("DISPOSABLE_EFFECT", isKeyboardVisible.toString())
+            Log.d("DISPOSABLE_EFFECT", isKeyboardVisible.toString()) // Check logs by opening and
+            // closing the keyboard. Click on InputField to do that.
         }
         view.viewTreeObserver.addOnGlobalLayoutListener(listener)
 

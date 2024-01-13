@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SideEffectsTheme {
 
-                // As per recommendation lf jetpack compose whatever compose functions you write, those
+                // As per recommendation of jetpack compose, whatever compose functions you write, those
                 // must be side effect free. what that means is impact of that function code should be
                 // limited to that function only, it should not manipulate any thing that belongs to the
                 // outside world of that function.
@@ -97,10 +97,10 @@ fun ListComposable() {
 
 @Composable
 fun Counter() {
-    var count = remember {
+    val count = remember {
         mutableStateOf(0)
     }
-    var key = count.value % 3 == 0
+    val key = count.value % 3 == 0
     // Log.d("COMPOSE-LOG", "Current count: ${count.value}") // This will get printed each time when
     // you click on button & the count will get increased each time.
 //    LaunchedEffect(key1 = false) {

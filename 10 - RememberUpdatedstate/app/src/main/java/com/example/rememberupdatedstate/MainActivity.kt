@@ -62,7 +62,7 @@ fun Counter(value: Int) {
         // LaunchedEffect block so it's being called with initial value of 0 since the LaunchedEffect
         // block is waiting for 2 seconds to increment the counter value.
         // And LaunchedEffect will not be called again as LaunchedEffect does not get called on
-        // recomposition, it only gets called on the initial composition of key1 value change.
+        // recomposition, it only gets called on the initial composition or key1 value change.
 
         // But let's suppose we want to use updated value of state and not a stale value.
         // whenever value of key1 gets satisfied then it cancels the current CoroutineScope and
