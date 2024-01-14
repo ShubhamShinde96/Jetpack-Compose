@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -31,7 +32,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProducedStateTheme {
 //                CounterWithProducedState()
-                AnimateLoader()
+//                AnimateLoader()
+                UsingDerivedStateExample()
             }
         }
     }
@@ -143,3 +145,46 @@ fun AnimateLoader() {
         }
     )
 }
+
+
+// Concept - derivedStateOf()
+
+@Composable
+fun UsingDerivedStateExample() {
+
+    val tableOf = remember { mutableStateOf(5) }
+//    val index = remember { mutableStateOf(1) }
+    val index = produceState(initialValue = 1) {
+        repeat(9) {
+            delay(1000)
+            value++
+        }
+    }
+
+    val message = remember {
+        derivedStateOf {
+            // What derivedStateOf does is if you have multiple objects of state and based on those
+            // multiple states you want to create a single state then in that case derivedStateOf
+            // comes into play.
+            // As you can see from the name, this is deriving new state based on multiple state objects.
+            "${tableOf.value} * ${index.value} = ${tableOf.value * index.value}"
+        }
+    }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize(1f),
+        content = {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = message.value,
+                    style = MaterialTheme.typography.headlineLarge
+                )
+            }
+        }
+    )
+}
+
+// The derivedStateOf is much more than this, read below article to find out more.
+// https://medium.com/androiddevelopers/jetpack-compose-when-should-i-use-derivedstateof-63ce7954c11b
+
