@@ -3,7 +3,13 @@ package com.example.producedstate
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -12,7 +18,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.unit.dp
 import com.example.producedstate.ui.theme.ProducedStateTheme
 import kotlinx.coroutines.delay
 
@@ -21,7 +30,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ProducedStateTheme {
-                CounterWithProducedState()
+//                CounterWithProducedState()
+                AnimateLoader()
             }
         }
     }
@@ -78,5 +88,58 @@ fun CounterWithProducedState() {
     Text(
         text = state.value.toString(),
         style = MaterialTheme.typography.headlineLarge
+    )
+}
+
+@Composable
+fun Loader() {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize(1f),
+        content = {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = "",
+                    modifier = Modifier.size(60.dp)
+                )
+                Text(text = "Loading")
+            }
+        }
+    )
+}
+
+// we'll try to animate above composable
+@Composable
+fun AnimateLoader() {
+
+    val degree = produceState(initialValue = 0) {
+        while (true) {
+            delay(16)
+            value = (value + 10) % 360 // circle is of 360 degree hence we have added % 360 to make
+            // sure the value doesn't go beyond 360.
+
+            // The same way we will be accessing liveData or flow and the way data will get updated in
+            // liveData or flow producedState will update the state and our UI will get recomposed and
+            // will get updated.
+        }
+    }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize(1f),
+        content = {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(60.dp)
+                        .rotate(degree.value.toFloat()) // We're using the state value here which is
+                // produced by produceState()
+                )
+                Text(text = "Loading")
+            }
+        }
     )
 }
