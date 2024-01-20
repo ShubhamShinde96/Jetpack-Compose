@@ -81,10 +81,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
 
     def nav_version = "2.7.6"
     implementation "androidx.navigation:navigation-compose:$nav_version"
-    implementation "androidx.hilt:hilt-navigation:1.1.0" // the videmodel will be working from navigation
+    implementation "androidx.hilt:hilt-navigation:1.1.0" // the viewModel will be working from navigation
     // framework, means navigation framework will be triggering ViewModel and we're using hilt hence
     // we want to trigger it through hilt that's why we're using this dependency.
 }

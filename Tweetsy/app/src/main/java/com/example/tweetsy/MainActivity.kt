@@ -23,16 +23,16 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    private lateinit var tweetsyApi: TweetsyApi
+//    @Inject
+//    lateinit var tweetsyApi: TweetsyApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        /*lifecycleScope.launch(Dispatchers.IO) {
             val response = tweetsyApi.getCategories()
-            Log.d("TweetsyApp", "Categories: $response")
-        }
+            Log.d("TweetsyApp", "Categories: ${response.body()?.distinct()}")
+        }*/
 
         setContent {
             TweetsyTheme {

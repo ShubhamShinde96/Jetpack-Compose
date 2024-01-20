@@ -12,7 +12,7 @@ interface TweetsyApi {
     suspend fun getTweets(@Header("X-JSON-Path") category: String): Response<List<TweetListItem>>
 
     @GET("v3/b/65a679a21f5677401f1e8461?meta=false")
-    @Headers("X-JSON-Path") // Using Headers annotation because here we're passing a static header value.
+    @Headers("X-JSON-Path:tweets..category") // Using Headers annotation because here we're passing a static header value.
     suspend fun getCategories(): Response<List<String>>
 
 }
